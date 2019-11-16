@@ -1,0 +1,67 @@
+def isWordGuessed(secretWord, lettersGuessed):
+    
+    wordGuess = 0
+    for letter in secretWord:
+        if letter in lettersGuessed:
+            wordGuess += 1
+        else:
+            return False
+    return True
+
+def getGuessedWord(secretWord, lettersGuessed):
+    
+    guessedWord = ""
+        
+    for letter in secretWord:
+        
+        if letter in lettersGuessed:
+            guessedWord = guessedWord + letter
+        else:
+            guessedWord = guessedWord + "_ "
+
+    return guessedWord
+    
+def getAvailableLetters(lettersGuessed):
+    
+    import string
+    joseph = string.ascii_lowercase
+    availableLetters = ""
+       
+    for letter in joseph:
+        if letter not in lettersGuessed:
+            availableLetters = availableLetters + letter
+    
+    return availableLetters
+
+def Hangaroo(secretWord):
+    
+    print("Welcome to Hangaroo!")
+    print("The word is " +  str(len(secretWord))  + " letters long.")
+    lettersGuessed = []
+    mistakesMade = 0
+    guessesLeft = 3
+    
+    while mistakesMade < 3:
+        if isWordGuessed(secretWord, lettersGuessed):
+            return print("Tumpak ganern!")
+        
+        print("You have " +  str( guessesLeft )  + " shotgun shells remaining para hulaan ang word")
+        print("Bala ng shotgun panghula: " + getAvailableLetters(lettersGuessed))
+            
+        guess = input("Type (kita) a letter to guess the word: ")
+        guess = str(guess)
+        guess = guess.lower()
+        
+        if guess not in lettersGuessed:
+            lettersGuessed.append(guess)
+            
+            if guess in secretWord:
+                print("Tumpak ang hula: " + getGuessedWord(secretWord, lettersGuessed))
+            else:
+                print("Ligwak ang hula: " + getGuessedWord(secretWord, lettersGuessed))
+                mistakesMade += 1
+                guessesLeft -= 1
+        else:
+            print("Ligwak! Naulit na yung letter!" + getGuessedWord(secretWord, lettersGuessed))
+            
+    return print("Ubos na hula siz. The word was " + str(secretWord))
