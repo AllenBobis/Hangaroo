@@ -1,0 +1,10 @@
+def isWordGuessed(secretWord, lettersGuessed):
+    
+    wordGuess = 0
+    for letter in secretWord:
+        if letter in lettersGuessed:
+            wordGuess += 1
+        else:
+            return False
+    return True
+
